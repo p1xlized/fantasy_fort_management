@@ -1,11 +1,17 @@
-use std::fs::File;
-use std::io::BufReader;
-use std::io::prelude::*;
+use tokio::fs::File;
+use tokio::io::{AsyncBufReadExt, BufReader}; // Provides the 'lines()' method for async
 
-pub fn read_file(path: &str) -> std::io::Result<Vec<String>> {
-    let file = File::open(path)?;
+pub async fn read_file(path: &str) -> std::io::Result<Vec<String>> {
+    let file = File::open(path).await?; // .await the open
     let reader = BufReader::new(file);
-    let names: Vec<String> = reader.lines().collect::<Result<_, _>>()?;
+
+    let mut lines = reader.lines(); // Create an async stream of lines
+    let mut names = Vec::new();
+
+    // In async, we usually iterate with a while loop
+    while let Some(line) = lines.next_line().await? {
+        names.push(line);
+    }
 
     Ok(names)
 }

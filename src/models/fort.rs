@@ -20,10 +20,10 @@ impl Fort {
             staff: Vec::new(),
         }
     }
-    pub fn addLoot(&mut self, item: Loot) {
+    pub fn add_loot(&mut self, item: Loot) {
         self.inventory.push(item);
     }
-    pub fn addStaff(&mut self, item: Mercenary) {
+    pub fn add_staff(&mut self, item: Mercenary) {
         self.staff.push(item);
     }
     pub fn show_inventory(&self) {
