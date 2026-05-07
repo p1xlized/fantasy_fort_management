@@ -1,0 +1,23 @@
+{
+  "inventory": [
+    {
+      "name": "Rusted Sword",
+      "rarity": "Common",
+      "value": 5,
+      "item_type": "Weapon"
+    },
+    {
+      "name": "Null Talisman",
+      "rarity": "Arcane",
+      "value": 5,
+      "item_type": "Artifact"
+    },
+    {
+      "name": "Mage Knight Cuirass",
+      "rarity": "Legendary",
+      "value": 5,
+      "item_type": "Armor"
+    }
+  ],
+  "last_updated": "Never"
+}
