@@ -7,6 +7,7 @@ pub enum Occupation {
     Cook,
     Archer,
     Blacksmith,
+    Queen,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -15,14 +16,19 @@ pub struct Mercenary {
     pub occupation: Occupation,
     pub level: u32,
     pub daily_cost: u64,
+    pub is_ruler: bool,
 }
 impl Mercenary {
-    fn new(name: String, occupation: Occupation, level: u32, daily_cost: u64) -> Self {
+    pub fn new(name: String, occupation: Occupation, level: u32, daily_cost: u64) -> Self {
         Mercenary {
             name,
             occupation,
             level,
             daily_cost,
+            is_ruler: false,
         }
+    }
+    pub fn make_as_leader(&mut self) {
+        self.is_ruler = true;
     }
 }

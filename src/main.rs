@@ -3,32 +3,43 @@ mod utils;
 
 use models::fort::Fort;
 use models::loot::{ItemType, Loot, Rarity};
+use models::raid::Raids;
 use utils::fileread::read_file;
 
+use crate::models::mercenaries::Mercenary;
+
 fn main() {
-    // let mut user_armory = Armory::new();
-    let sword = Loot {
-        name: String::from("Rusted Sword"),
-        rarity: Rarity::Common,
-        value: 5,
-        item_type: ItemType::Weapon,
-    };
-    let talisman = Loot {
-        name: String::from("Null Talisman"),
-        rarity: Rarity::Arcane,
-        value: 5,
-        item_type: ItemType::Artifact,
-    };
-    let cuirass = Loot {
-        name: String::from("Mage Knight Cuirass"),
-        rarity: Rarity::Legendary,
-        value: 5,
-        item_type: ItemType::Armor,
-    };
-    match read_file("raid_names.txt") {
-        Ok(_) => println!("File read successfully."),
-        Err(e) => println!("Error reading file: {}", e),
-    }
+    let mut fort = Fort::new(String::from("Fort Downguard"), 12000);
+
+    let initial_raids = Raids::new();
+    initial_raids.raids.iter().for_each(|raid| {
+        println!(
+            "Location: {} | Level: {} | Reward: {}",
+            raid.location, raid.level, raid.reward
+        );
+    });
+    let mercenary1 = Mercenary::new(
+        String::from("Alain StrongHeart"),
+        models::mercenaries::Occupation::Knight,
+        2,
+        18,
+    );
+    fort.addStaff(mercenary1);
+    let mercenary2 = Mercenary::new(
+        String::from("Greg of BlackStone"),
+        models::mercenaries::Occupation::Mage,
+        2,
+        18,
+    );
+    fort.addStaff(mercenary2);
+    let mut queen = Mercenary::new(
+        String::from("Beloved Kristina Barri"),
+        models::mercenaries::Occupation::Mage,
+        2,
+        18,
+    );
+    queen.make_as_leader();
+    fort.addStaff(queen);
     // user_armory.addItem(sword);
     // user_armory.addItem(talisman);
     // user_armory.addItem(cuirass);

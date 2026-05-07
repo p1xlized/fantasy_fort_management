@@ -8,7 +8,7 @@ pub struct Fort {
     pub inventory: Vec<Loot>,
     pub name: String,
     pub budget: u64,
-    pub stuff: Vec<Mercenary>,
+    pub staff: Vec<Mercenary>,
 }
 
 impl Fort {
@@ -17,11 +17,14 @@ impl Fort {
             inventory: Vec::new(),
             name: name, // use String::from
             budget: budget,
-            stuff: Vec::new(),
+            staff: Vec::new(),
         }
     }
-    pub fn addItem(&mut self, item: Loot) {
+    pub fn addLoot(&mut self, item: Loot) {
         self.inventory.push(item);
+    }
+    pub fn addStaff(&mut self, item: Mercenary) {
+        self.staff.push(item);
     }
     pub fn show_inventory(&self) {
         println!("--- Armory Report for: {}) ---", self.name);
